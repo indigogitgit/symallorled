@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Overlay</title>
+    <meta name="viewport" content="width=3072, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="overlay-container">
+
+    <!-- ===== ФОНОВОЕ ВИДЕО ===== -->
+    <video class="background-video" autoplay muted loop playsinline>
+        <source src="BLUE.mov" type="video/mp4">
+    </video>
+
+    <!-- ===== SVG ФОРМА (ВСТРОЕННАЯ) ===== -->
+    <svg width="0" height="0" style="position:absolute;">
+        <defs>
+            <clipPath id="glass-shape" clipPathUnits="userSpaceOnUse">
+                <path d="
+                    M0 0
+                    L450 0
+                    C520 80 560 200 560 320
+                    C560 440 520 560 450 640
+                    L0 640
+                    Z
+                " />
+            </clipPath>
+        </defs>
+    </svg>
+
+    <!-- ===== СТЕКЛЯННЫЙ СЛОЙ ===== -->
+    <div class="glass-layer"></div>
+
+    <!-- ===== PNG ===== -->
+    <img class="background-image" src="BACLLED.png" alt="">
+
+    <!-- Дата -->
+    <div class="date-block" id="dateBlock"></div>
+
+    <!-- Время -->
+    <div class="time-block" id="timeBlock"></div>
+
+    <!-- Погода -->
+    <div class="weather-card">
+        <div class="weather-content">
+            <div class="weather-temp">+5°C</div>
+            <div class="weather-desc">Облачно</div>
+        </div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

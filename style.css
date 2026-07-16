@@ -1,0 +1,195 @@
+/* =========================
+   БАЗОВЫЙ HTML
+   ========================= */
+html {
+    margin: 0;                /* убираем внешний отступ браузера */
+    padding: 0;               /* убираем внутренний отступ */
+    background: transparent;  /* делаем HTML полностью прозрачным */
+}
+
+/* =========================
+   BODY (основной холст)
+   ========================= */
+body {
+    margin: 0;                        /* убирает стандартные отступы */
+    width: 600px;                     /* фиксированная ширина LED-холста */
+    height: 640px;                    /* фиксированная высота LED-холста */
+    overflow: hidden;                 /* скрывает всё за пределами холста */
+    font-family: Arial, sans-serif;   /* основной шрифт */
+    background: transparent;          /* полностью прозрачный фон */
+    color: white;                     /* цвет текста по умолчанию */
+}
+
+/* =========================
+   КОНТЕЙНЕР (база для абсолютных слоёв)
+   ========================= */
+.overlay-container {
+    position: relative;    /* создаёт точку отсчёта для position:absolute */
+    width: 100%;           /* занимает всю ширину body */
+    height: 100%;          /* занимает всю высоту body */
+}
+
+/* =========================
+   ФОНОВОЕ ВИДЕО
+   ========================= */
+.background-video {
+    position: absolute;     /* выводим из потока */
+    left: 0;                /* прижимаем к левому краю */
+    top: 0;                 /* прижимаем к верхнему краю */
+    width: 100%;            /* растягиваем по ширине контейнера */
+    height: 100%;           /* растягиваем по высоте контейнера */
+    object-fit: cover;      /* масштабирует видео без искажения пропорций */
+    z-index: -3;            /* самый нижний слой */
+    pointer-events: none;   /* не перехватывает клики */
+}
+
+/* =========================
+   СТЕКЛЯННЫЙ SVG СЛОЙ
+   ========================= */
+.glass-layer {
+    position: absolute;        /* выводим из потока */
+    left: 0;                   /* позиционирование по X */
+    top: 0;                    /* позиционирование по Y */
+    width: 600px;              /* ширина стеклянной формы */
+    height: 640px;             /* высота стеклянной формы */
+
+    background: rgba(255,255,255,0.15); /* цвет стекла (полупрозрачный белый) */
+
+    backdrop-filter: blur(2px);        /* размытие фона (Chrome) */
+    -webkit-backdrop-filter: blur(0px); /* размытие для Android WebView */
+
+    clip-path: url(#glass-shape);      /* применяем SVG форму */
+
+    z-index: -2;              /* слой над видео */
+    pointer-events: none;     /* не перехватывает клики */
+}
+
+/* =========================
+   PNG ЛОГОТИП
+   ========================= */
+.background-image {
+    position: absolute;    /* выводим из потока */
+    left: 0;               /* позиция по X */
+    top: 0;                /* позиция по Y */
+    width: 650px;          /* ширина изображения */
+    opacity: 0.4;          /* прозрачность PNG */
+    z-index: -1;           /* слой выше стекла */
+    pointer-events: none;  /* не перехватывает клики */
+}
+
+/* =========================
+   ДАТА
+   ========================= */
+.date-block {
+    position: absolute;     /* свободное позиционирование */
+    top: 20px;              /* отступ сверху */
+    left: 90px;             /* отступ слева */
+
+    font-size: 42px;        /* размер текста */
+    font-weight: 500;       /* средняя жирность */
+
+    padding: 20px 10px;     /* внутренние отступы */
+
+    background: rgba(0,0,0,0.1);   /* полупрозрачный фон */
+
+    backdrop-filter: blur(20px);         /* стеклянный эффект */
+    -webkit-backdrop-filter: blur(20px); /* поддержка Android */
+
+    border-right: 3px solid rgba(255,255,255,0.3); /* правая светлая грань */
+
+    border-radius: 16px;    /* СКРУГЛЕНИЕ УГЛОВ */
+
+    /* ===== DISABLE SHAPE (убери форму блока) ===== */
+    /* background: rgba(0,0,0,0.1);  последний параметр на 0 меняем */
+    /* закомментируй строки чтобы*/
+    /* border-radius: 16px; */
+    /* -webkit-backdrop-filter: blur(20px);*/
+     /* backdrop-filter: blur(20px); */
+     /* border-right: 3px solid rgba(255,255,255,0.3); */
+
+    
+
+    z-index: 2;             /* слой поверх фона */
+}
+
+/* =========================
+   ВРЕМЯ
+   ========================= */
+.time-block {
+    position: absolute;     /* свободное позиционирование */
+    top: 130px;             /* ниже даты */
+    left: 90px;             /* выравнивание по X */
+
+    font-size: 72px;        /* крупный текст */
+    font-weight: 700;       /* жирный текст */
+
+    padding: 20px 20px;     /* внутренние отступы */
+
+    background: rgba(0,0,0,0.1);   /* фон */
+
+    backdrop-filter: blur(20px);         /* стеклянный эффект */
+    -webkit-backdrop-filter: blur(20px); /* поддержка Android */
+
+    border-right: 3px solid rgba(255,255,255,0.3); /* декоративная грань */
+
+    border-radius: 16px;    /* СКРУГЛЕНИЕ */
+
+    /* ===== DISABLE SHAPE (убери форму блока) ===== */
+    /* background: rgba(0,0,0,0.1);  последний параметр на 0 меняем */
+    /* закомментируй строки чтобы*/
+    /* border-radius: 16px; */
+    /* -webkit-backdrop-filter: blur(20px);*/
+     /* backdrop-filter: blur(20px); */
+     /* border-right: 3px solid rgba(255,255,255,0.3); */
+
+    
+
+    z-index: 2;
+}
+
+/* =========================
+   ПОГОДА
+   ========================= */
+.weather-card {
+    position: absolute;     /* свободное позиционирование */
+    top: 280px;             /* ниже времени */
+    left: 90px;             /* выравнивание по X */
+
+    width: 250px;           /* ширина блока */
+    height: 300px;          /* высота блока */
+
+    background: rgba(0,0,0,0.1); /* полупрозрачный фон */
+
+    backdrop-filter: blur(20px);         /* стеклянный эффект */
+    -webkit-backdrop-filter: blur(20px); /* поддержка Android */
+
+    border-right: 3px solid rgba(255,255,255,0.3); /* светлая правая грань */
+
+    border-radius: 60px;    /* сильное скругление углов */
+
+    /* ===== DISABLE SHAPE (убери форму блока) ===== */
+    /* background: rgba(0,0,0,0.1);  последний параметр на 0 меняем */
+    /* закомментируй строки чтобы*/
+    /* border-radius: 16px; */
+    /* -webkit-backdrop-filter: blur(20px);*/
+     /* backdrop-filter: blur(20px); */
+     /* border-right: 3px solid rgba(255,255,255,0.3); */
+
+    
+
+    display: flex;          /* включает flex-контейнер */
+    align-items: center;    /* вертикальное центрирование */
+    padding-left: 40px;     /* отступ текста от левого края */
+
+    z-index: 2;
+}
+
+.weather-temp {
+    font-size: 90px;        /* основной акцент */
+    font-weight: 400;       /* нормальная жирность */
+}
+
+.weather-desc {
+    font-size: 36px;        /* размер описания */
+    margin-top: 10px;       /* отступ сверху */
+}
