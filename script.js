@@ -75,7 +75,10 @@ async function fetchWeather() {
 function updateClock() {
     const now = new Date();
     document.getElementById("timeBlock").textContent =
-        now.toLocaleTimeString('ru-RU');
+        now.toLocaleTimeString('ru-RU', {
+            hour: '2-digit',
+            minute: '2-digit'
+        });
 }
 
 /* --- ИНИЦИАЛИЗАЦИЯ --- */
